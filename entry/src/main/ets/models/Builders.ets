@@ -29,9 +29,9 @@ export struct ShouYeBuilder {
               List({space:10}){
                 ForEach(data.channelList,(item:string,i:number)=>{
                   ListItem(){
-                    Text(item)
-                      .fontWeight(this.currentListIndex===i?800:400)
-                    if (this.currentListIndex === i) {
+                    Column(){
+                      Text(item)
+                        .fontWeight(this.currentListIndex===i?800:400)
                       Divider()
                         .width(2)
                         .color(Color.Orange)
