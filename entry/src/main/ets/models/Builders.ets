@@ -1,52 +1,95 @@
-
+import * as data from '../models/data'
 @Builder
-export function tabBarBuilder(img:Resource,text:string,index:number,currentIndex:number){
-  Column({space:5}){
+export function tabBarBuilder(img: Resource, text: string, index: number, currentIndex: number) {
+  Column({ space: 5 }) {
     Image(img)
       .width(30)
       .padding(3)
       .borderRadius(20)
-      .backgroundColor(currentIndex===index?Color.Orange:Color.White)
+      .backgroundColor(currentIndex === index ? Color.Orange : Color.White)
     Text(text)
       .fontSize(14)
   }
   .padding(5)
 }
-@Builder
-export function ShouYeBuilder(currentIndex:number) {
-  //首页
-  TabContent() {
+
+@Component
+export struct ShouYeBuilder {
+  @State currentListIndex:number = 0
+  build() {
+    //首页
+    Column() {
+      Stack() {
+        Scroll() {
+          Column() {
+            //置顶图片
+            Image($rawfile('home_top.jpg'))
+            //首页-频道数据（导航+半模态）
+            Stack(){
+              List({space:10}){
+                ForEach(data.channelList,(item:string,i:number)=>{
+                  ListItem(){
+                    Text(item)
+                      .fontWeight(this.currentListIndex===i?800:400)
+                    if (this.currentListIndex === i) {
+
+                    }
+                  }
+                  .onClick(()=>{
+                    this.currentListIndex=i
+                  })
+                })
+              }
+              .scrollBar(BarState.Off)
+              .width('100%')
+              .listDirection(Axis.Horizontal)
+            }
+          }
+          .width('100%')
+        }
+        .fullSize()
+      }
+      .fullSize()
+    }
+    .fullSize()
   }
-  .tabBar(tabBarBuilder($rawfile('ic_tab_0.svg'), '首页',0,currentIndex))
 }
 
 
 @Builder
-export function CheYouQuanBuilder(currentIndex:number) {
+export function CheYouQuanBuilder() {
   //车友圈
-  TabContent() {
+  Column() {
   }
-  .tabBar(tabBarBuilder($rawfile('ic_tab_1.svg'), '车友圈',1,currentIndex))
-}
-@Builder
-export function XuanCheBuilder(currentIndex:number) {
-  //选车
-  TabContent() {
-  }
-  .tabBar(tabBarBuilder($rawfile('ic_tab_2.svg'), '选车',2,currentIndex))
+  .fullSize()
 }
 
 @Builder
-export function ErShouCheBuilder(currentIndex:number) {
-  //二手车
-  TabContent() {
+export function XuanCheBuilder() {
+  //选车
+  Column() {
   }
-  .tabBar(tabBarBuilder($rawfile('ic_tab_3.svg'), '二手车',3,currentIndex))
+  .fullSize()
 }
+
 @Builder
-export function FuWuBuilder(currentIndex:number) {
-  //服务
-  TabContent() {
+export function ErShouCheBuilder() {
+  //二手车
+  Column() {
   }
-  .tabBar(tabBarBuilder($rawfile('ic_tab_4.svg'), '服务',4,currentIndex))
+  .fullSize()
+}
+
+@Builder
+export function FuWuBuilder() {
+  //服务
+  Column() {
+  }
+  .fullSize()
+}
+
+@Styles
+function fullSize() {
+  .width('100%')
+  .height('100%')
 }
