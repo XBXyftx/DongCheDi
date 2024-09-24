@@ -32,7 +32,9 @@ export struct ShouYeBuilder {
                     Text(item)
                       .fontWeight(this.currentListIndex===i?800:400)
                     if (this.currentListIndex === i) {
-
+                      Divider()
+                        .width(2)
+                        .color(Color.Orange)
                     }
                   }
                   .onClick(()=>{
