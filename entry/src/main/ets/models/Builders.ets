@@ -34,10 +34,11 @@ export struct ShouYeBuilder {
                       Text(item)
                         .fontWeight(this.currentListIndex===i?800:400)
                         .fontSize(this.fontSize)
-                      Divider()
-                        .width(this.currentListIndex===i?30:0)
-                        .strokeWidth(2)
-                        .color(this.currentListIndex===i?Color.Orange:Color.Transparent)
+                        .decoration({
+                          type:this.currentListIndex===i?TextDecorationType.Underline:TextDecorationType.None,
+                          color:this.currentListIndex===i?Color.Orange:Color.Orange,
+                          style:TextDecorationStyle.SOLID
+                        })
                     }
                   }
                   .onClick(()=>{
