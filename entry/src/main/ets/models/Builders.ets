@@ -16,6 +16,7 @@ export function tabBarBuilder(img: Resource, text: string, index: number, curren
 @Component
 export struct ShouYeBuilder {
   @State currentListIndex:number = 0
+  @State fontSize:number = 14
   build() {
     //首页
     Column() {
@@ -32,6 +33,7 @@ export struct ShouYeBuilder {
                     Column(){
                       Text(item)
                         .fontWeight(this.currentListIndex===i?800:400)
+                        .fontSize(this.fontSize)
                       Divider()
                         .width(this.currentListIndex===i?30:0)
                         .strokeWidth(2)
